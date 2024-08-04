@@ -1,0 +1,16 @@
+.maincont {
+  width: 100%;
+  padding: 15px 0;
+}
+
+.maincont > span {
+  color: #1a1a1a;
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}

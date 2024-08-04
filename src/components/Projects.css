@@ -1,0 +1,67 @@
+.hcar {
+  height: 70vh;
+}
+
+.bgstyle {
+  background-image: url("/public/assets/blog.png");
+  background-size: cover;
+  background-position: center;
+}
+
+
+@media only screen and (max-width: 1440px){
+    .hcar {
+        height: 60vh;
+      }
+}
+
+@media only screen and (max-width: 1250px){
+    .hcar {
+        height: 50vh;
+      }
+}
+
+@media only screen and (max-width: 1024px){
+    .hcar {
+        height: 40vh;
+      }
+}
+
+@media only screen and (max-width: 980px){
+    .hcar {
+        height:35vh;
+        width: 100%;
+      }
+
+      #desc{
+        font-size: 16px;
+      }
+
+      #live{
+        width: max-content;
+        margin-bottom: 1vh;
+      }
+}
+
+@media only screen and (max-width: 600px){
+    .hcar{
+        height: 30vh;
+    }
+    #desc{
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
+
+@media only screen and (max-width: 450px){
+.hcar{
+    height: 34vh;
+}
+}
+
+@media only screen and (max-width: 450px){
+    .hcar{
+        height: 28rem;
+    }
+}
