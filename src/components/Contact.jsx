@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ContactForm = () => {
+const ContactForm = forwardRef((props, ref) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -43,9 +43,9 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="py-12 bg-transparent">
+    <div ref={ref} className="py-12 bg-transparent">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-slate-950 text-center mb-8">Send a Message</h2>
+        <h2 className="text-3xl font-medium text-center mb-8 text-slate-950">Send a Message</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-slate-950">Name</label>
@@ -95,6 +95,6 @@ const ContactForm = () => {
       <ToastContainer />
     </div>
   );
-};
+});
 
 export default ContactForm;

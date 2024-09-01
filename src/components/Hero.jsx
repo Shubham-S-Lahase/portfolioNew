@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
-const Hero = () => {
+const Hero = forwardRef(({ scrollToProjects }, ref) => {
   const [showElements, setShowElements] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden border-b-2 border-gray-300">
+    <div ref={ref} className="relative w-full h-screen overflow-hidden border-b-2 border-gray-300">
       {showElements && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
           <motion.div
@@ -106,6 +106,7 @@ const Hero = () => {
             variants={variants}
             transition={{ ...transition, delay: 1.8 }}
             className="text-zinc-950 py-1 md:py-2 px-2 md:px-4 rounded-lg border-2 border-gray-600 hover:bg-slate-800 hover:text-pink-50 hover:border-slate-800"
+            onClick={scrollToProjects}
           >
             View My Work
           </motion.button>
@@ -113,6 +114,6 @@ const Hero = () => {
       )}
     </div>
   );
-};
+});
 
 export default Hero;

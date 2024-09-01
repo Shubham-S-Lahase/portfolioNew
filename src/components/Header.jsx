@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const Header = () => {
+const Header = ({ scrollToSection, heroRef, aboutRef, projectsRef, contactRef }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,15 +26,19 @@ const Header = () => {
     >
       <div className="container mx-auto flex justify-between items-center w-full px-4 md:px-8">
         <div className="text-xl font-semibold hover:underline hover:scale-110">
-          <a href="#home">Home</a>
+        <a onClick={() => scrollToSection(heroRef)}>Home</a>
         </div>
         <nav>
           <ul className="flex space-x-4 text-lg md:text-xl font-semibold">
-            {['About', 'Projects', 'Contact'].map((item) => (
-              <li key={item} className="hover:underline hover:scale-110">
-                <a href={`#${item.toLowerCase()}`}>{item}</a>
-              </li>
-            ))}
+            <li className="hover:underline hover:scale-110">
+              <a onClick={() => scrollToSection(aboutRef)}>About</a>
+            </li>
+            <li className="hover:underline hover:scale-110">
+              <a onClick={() => scrollToSection(projectsRef)}>Projects</a>
+            </li>
+            <li className="hover:underline hover:scale-110">
+              <a onClick={() => scrollToSection(contactRef)}>Contact</a>
+            </li>
           </ul>
         </nav>
       </div>

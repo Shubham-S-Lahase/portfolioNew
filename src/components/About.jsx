@@ -1,39 +1,16 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Skills from "./Skills";
 
 const timelineItems = [
-  {
-    year: "May,2019",
-    title: "Bachelor of Computer Applications",
-    description:
-      "Graduated with an 83.86% from JTES's Arts, Commerce, and Science College, Jamnern Maharashtra",
-  },
-  {
-    year: "July,2021",
-    title: "Master of Business Administration",
-    description:
-      "Completed MBA from North Maharashtra University, Jalgaon, Maharashtra, with a score of 78.56%.",
-  },  
-  {
-    year: "November,2022",
-    title: "6 Months Full Stack (MERN) Program",
-    description:
-      "Completed an intensive 6-month Full Stack (MERN) bootcamp, where I gained in-depth knowledge and practical skills in both frontend and backend development using the MERN stack. The program covered key technologies including MongoDB, Express.js, React.js, and Node.js. Throughout the course, I participated in numerous hands-on projects, which helped me master end-to-end development processes. These projects ranged from building dynamic, responsive user interfaces to implementing robust server-side logic and efficient database management. The bootcamp provided me with a solid foundation and expertise in creating full-fledged web applications using the MERN stack.",
-  },  
-  {
-    year: "August, 2023 - June 2024",
-    title: "Full Stack Developer",
-    description:
-    "Played a key role in various projects with a primary focus on frontend development.Utilized technologies such as React.js, Next.js, Framer Motion, and Tailwind CSS to create dynamic, responsive user interfaces.Enhanced user experiences and ensured cross-device compatibility through effective use of modern web technologies.Contributed to a diverse range of projects, including marketing websites, low-code portals, and comprehensive blog management platforms."
-  },
+  // timelineItems data
 ];
 
-const About = () => {
+const About = forwardRef((props, ref) => {
   return (
-    <div className="flex flex-col gap-16 border-b-2 border-gray-300 py-24">
-      <h1 className="w-5/6 mx-auto text-center text-slate-950 text-xl underline">About Me</h1>
+    <div ref={ref} className="flex flex-col gap-16 border-b-2 border-gray-300 py-24">
+      <h1 className="w-5/6 mx-auto text-3xl font-medium text-center mb-8 text-slate-950">About Me</h1>
       <div>
         <p className="text-slate-950 text-xl mb-4 text-center mx-auto w-5/6">
           I am an experienced Frontend Engineer with a strong focus on creating
@@ -59,7 +36,7 @@ const About = () => {
       </div>
     </div>
   );
-};
+});
 
 const TimelineItem = ({ item, index }) => {
   const controls = useAnimation();
