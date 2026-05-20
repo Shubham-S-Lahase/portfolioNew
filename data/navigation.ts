@@ -1,0 +1,13 @@
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+export const navItems: NavItem[] = [
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Resume", href: "#resume" },
+  { label: "Contact", href: "#contact" },
+];
