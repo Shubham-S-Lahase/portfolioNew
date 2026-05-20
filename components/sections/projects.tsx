@@ -92,6 +92,7 @@ export function Projects() {
 
 function ProjectCard({ project }: { project: Project }) {
   const hasLiveDemo = Boolean(project.demo) && project.demo !== "#";
+  const hasGithub = Boolean(project.github) && project.github !== "#";
   return (
     <TiltCard className="rounded-2xl">
       <Card className="gradient-border glow-card group relative h-full overflow-hidden">
@@ -161,12 +162,14 @@ function ProjectCard({ project }: { project: Project }) {
                 <span className="opacity-70">Coming soon</span>
               )}
             </Button>
-            <Button asChild variant="outline" size="sm">
-              <a href={project.github} target="_blank" rel="noreferrer noopener">
-                <Github className="h-4 w-4" />
-                GitHub
-              </a>
-            </Button>
+            {hasGithub ? (
+              <Button asChild variant="outline" size="sm">
+                <a href={project.github} target="_blank" rel="noreferrer noopener">
+                  <Github className="h-4 w-4" />
+                  GitHub
+                </a>
+              </Button>
+            ) : null}
           </div>
         </CardContent>
       </Card>
