@@ -36,7 +36,7 @@ export const highlights: Highlight[] = [
 
 export const stats = [
   { label: "Years of experience", value: "3+" },
-  { label: "Projects shipped", value: "20+" },
-  { label: "Production deployments", value: "100+" },
+  { label: "Projects shipped", value: "3" },
+  { label: "Product surfaces built", value: "6+" },
   { label: "Components built", value: "500+" },
 ];
