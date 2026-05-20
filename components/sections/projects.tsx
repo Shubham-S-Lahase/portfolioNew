@@ -1,9 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Github, Sparkles } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 
 import { SectionHeading } from "@/components/section-heading";
 import { Badge } from "@/components/ui/badge";
@@ -104,26 +103,6 @@ function ProjectCard({ project }: { project: Project }) {
             project.accent
           )}
         />
-
-        {project.image ? (
-          <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/60 bg-secondary/30">
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              unoptimized
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/80 via-card/10 to-transparent" />
-            {project.highlight ? (
-              <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-emerald-300 backdrop-blur">
-                <Sparkles className="h-3 w-3" />
-                Shipped
-              </span>
-            ) : null}
-          </div>
-        ) : null}
 
         <CardContent className="relative flex h-full flex-col p-6">
           <div className="flex items-start justify-between gap-3">

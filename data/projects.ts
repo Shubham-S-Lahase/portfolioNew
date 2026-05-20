@@ -14,13 +14,11 @@ export type Project = {
   features: string[];
   stack: string[];
   category: ProjectCategory;
-  image?: string; // optional preview thumbnail (path inside /public)
   // TODO: Replace with the real GitHub repo URL for each project.
   github: string;
   // TODO: Replace with the real live-demo URL for each project.
   demo: string;
   accent: string; // gradient classes for hover glow
-  highlight?: boolean; // shipped real projects are flagged true
 };
 
 export const projects: Project[] = [
@@ -39,12 +37,10 @@ export const projects: Project[] = [
     ],
     stack: ["React", "Material UI", "Redux", "Firebase"],
     category: "Dashboard",
-    image: "/assets/cffs.gif",
     // TODO: Replace with the real GitHub repo for this project.
     github: "https://github.com/Shubham-S-Lahase",
     demo: "https://cffs.vercel.app/",
     accent: "from-amber-500/40 via-orange-500/30 to-rose-500/40",
-    highlight: true,
   },
   {
     slug: "full-stack-blog-app",
@@ -61,12 +57,10 @@ export const projects: Project[] = [
     ],
     stack: ["React", "Node.js", "Express.js", "MongoDB", "CSS"],
     category: "Full-Stack",
-    image: "/assets/blog.gif",
     // TODO: Replace with the real GitHub repo for this project.
     github: "https://github.com/Shubham-S-Lahase",
     demo: "https://clientzuai.onrender.com/",
     accent: "from-emerald-500/40 via-teal-500/30 to-sky-500/40",
-    highlight: true,
   },
   {
     slug: "zoom-clone",
@@ -83,12 +77,10 @@ export const projects: Project[] = [
     ],
     stack: ["Next.js", "Tailwind CSS", "Clerk", "Stream.io", "MongoDB"],
     category: "Real-Time",
-    image: "/assets/zoom.gif",
     // TODO: Replace with the real GitHub repo for this project.
     github: "https://github.com/Shubham-S-Lahase",
     demo: "https://zoomclone-sepia.vercel.app/",
     accent: "from-sky-500/40 via-blue-500/30 to-indigo-500/40",
-    highlight: true,
   },
   {
     slug: "music-player-app",
@@ -105,12 +97,10 @@ export const projects: Project[] = [
     ],
     stack: ["React", "CSS"],
     category: "Frontend",
-    image: "/assets/msp.gif",
     // TODO: Replace with the real GitHub repo for this project.
     github: "https://github.com/Shubham-S-Lahase",
     demo: "https://music-player-sepia-xi.vercel.app/",
     accent: "from-fuchsia-500/40 via-pink-500/30 to-rose-500/40",
-    highlight: true,
   },
   {
     slug: "marketplace-social-platform",
