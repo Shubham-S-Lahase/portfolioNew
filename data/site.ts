@@ -15,8 +15,7 @@ export const siteConfig = {
   phone: "", // optional — leave empty to hide
   // TODO: Replace with your live portfolio URL once deployed.
   url: "https://shubhamlahase.dev",
-  // TODO: Replace with your real resume file path inside /public.
-  resumeUrl: "/Shubham-Lahase-Resume.pdf",
+  resumeUrl: "/assets/Shubham.pdf",
   socials: {
     linkedin: "https://www.linkedin.com/in/shubhamlahase/",
     // TODO: Replace with your real GitHub profile URL.
