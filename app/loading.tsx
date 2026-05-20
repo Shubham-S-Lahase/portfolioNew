@@ -8,18 +8,17 @@ export default function Loading() {
     >
       <div className="relative flex flex-col items-center gap-6">
         <div className="relative">
-          <div className="absolute inset-0 -m-3 rounded-2xl bg-gradient-to-br from-primary via-accent to-sky-400 opacity-40 blur-2xl" />
-          <div className="relative grid h-20 w-20 place-items-center rounded-2xl border border-border/70 bg-card/80 backdrop-blur">
-            <span className="text-2xl font-bold tracking-tight gradient-text">
+          <div className="absolute inset-0 -m-3 rounded-xl bg-primary/30 opacity-50 blur-2xl" />
+          <div className="relative grid h-20 w-20 place-items-center rounded-xl border border-primary/50 bg-card/90 backdrop-blur">
+            <span className="font-mono text-2xl font-bold tracking-tight text-primary">
               SL
             </span>
-            <span className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
             <span
               aria-hidden
-              className="absolute -inset-px rounded-2xl"
+              className="absolute -inset-px rounded-xl"
               style={{
                 background:
-                  "conic-gradient(from 0deg, transparent, hsl(228 100% 67%), transparent 30%)",
+                  "conic-gradient(from 0deg, transparent, hsl(78 100% 55%), transparent 30%)",
                 animation: "border-spin 1.6s linear infinite",
                 WebkitMask:
                   "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
@@ -31,14 +30,15 @@ export default function Loading() {
           </div>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-muted-foreground">
-            Crafting your experience…
+          <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            loading…
           </span>
-          <div className="h-1 w-40 overflow-hidden rounded-full bg-secondary">
-            <div className="h-full w-1/3 animate-marquee bg-gradient-to-r from-primary via-accent to-sky-400" />
+          <div className="h-[2px] w-40 overflow-hidden rounded-full bg-secondary">
+            <div className="h-full w-1/3 animate-marquee bg-primary" />
           </div>
         </div>
       </div>
+      <style>{`@keyframes border-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}`}</style>
     </div>
   );
 }

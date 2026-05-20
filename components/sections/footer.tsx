@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Link href="#hero" className="inline-flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-primary via-accent to-sky-400 text-sm font-bold text-background">
+              <span className="grid h-9 w-9 place-items-center rounded-md border border-primary/50 bg-primary/15 text-sm font-bold text-primary">
                 SL
               </span>
               <span className="text-sm font-semibold">{siteConfig.name}</span>

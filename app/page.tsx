@@ -3,10 +3,10 @@ import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
 import { Experience } from "@/components/sections/experience";
 import { Projects } from "@/components/sections/projects";
-import { Testimonials } from "@/components/sections/testimonials";
 import { Resume } from "@/components/sections/resume";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
+import { TechMarquee } from "@/components/effects/tech-marquee";
 
 export default function HomePage() {
   return (
@@ -14,9 +14,9 @@ export default function HomePage() {
       <Hero />
       <About />
       <Skills />
+      <TechMarquee />
       <Experience />
       <Projects />
-      <Testimonials />
       <Resume />
       <Contact />
       <Footer />

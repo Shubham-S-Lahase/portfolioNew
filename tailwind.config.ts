@@ -42,18 +42,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        brand: {
-          50: "#eef4ff",
-          100: "#dae6ff",
-          200: "#bcd1ff",
-          300: "#8fb4ff",
-          400: "#5d8aff",
-          500: "#3a64ff",
-          600: "#2143f5",
-          700: "#1a33db",
-          800: "#1a2eb0",
-          900: "#1c2c89",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -68,14 +56,6 @@ const config: Config = {
         "fade-in": {
           from: { opacity: "0" },
           to: { opacity: "1" },
-        },
-        "gradient-shift": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
-        "border-spin": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
@@ -100,19 +80,11 @@ const config: Config = {
       },
       animation: {
         "fade-in": "fade-in 0.6s ease-out forwards",
-        "gradient-shift": "gradient-shift 14s ease infinite",
-        "border-spin": "border-spin 8s linear infinite",
         float: "float 6s ease-in-out infinite",
         "pulse-soft": "pulse-soft 4s ease-in-out infinite",
         marquee: "marquee 30s linear infinite",
         shimmer: "shimmer 2.5s linear infinite",
         blink: "blink 1s steps(2, start) infinite",
-      },
-      backgroundImage: {
-        "grid-pattern":
-          "linear-gradient(to right, hsl(var(--border) / 0.4) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px)",
-        "radial-fade":
-          "radial-gradient(ellipse at center, hsl(var(--background)) 0%, transparent 70%)",
       },
     },
   },

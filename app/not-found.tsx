@@ -16,14 +16,14 @@ export default function NotFound() {
           Error 404
         </p>
         <h1 className="mt-3 text-6xl font-semibold tracking-tight sm:text-7xl">
-          <span className="gradient-text">Page not found</span>
+          <span className="text-primary">Page not found</span>
         </h1>
         <p className="mt-4 max-w-md text-balance text-muted-foreground">
           The page you&apos;re looking for doesn&apos;t exist, has moved, or never
           existed in the first place.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild variant="gradient" size="lg">
+          <Button asChild variant="default" size="lg">
             <Link href="/">
               <Home className="h-4 w-4" />
               Back to home

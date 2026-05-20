@@ -57,7 +57,7 @@ export function TiltCard({ children, className, intensity = 8 }: TiltCardProps) 
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 800 }}
-      className={cn("glow-card will-change-transform", className)}
+      className={cn("will-change-transform", className)}
     >
       {children}
     </motion.div>

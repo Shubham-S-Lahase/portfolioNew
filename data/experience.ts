@@ -13,7 +13,7 @@ export const experience: ExperienceItem[] = [
     company: "Biztoso Technologies Pvt. Ltd.",
     role: "Frontend Developer",
     period: "Present",
-    location: "India",
+    location: "Bangalore",
     description:
       "Building a large social + marketplace platform and a low-code internal product, owning frontend architecture and performance.",
     bullets: [
@@ -38,7 +38,7 @@ export const experience: ExperienceItem[] = [
     company: "Gajan Solutions India Pvt. Ltd.",
     role: "Full Stack Developer",
     period: "Previous role",
-    location: "India",
+    location: "Hyderabad",
     description:
       "Shipped corporate websites, SAP plugin UIs, and full-stack MERN applications with a strong focus on UX and reliability.",
     bullets: [
