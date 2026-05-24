@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Twitter, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 
 import { siteConfig } from "@/data/site";
 import { navItems } from "@/data/navigation";
@@ -37,15 +37,6 @@ export function Footer() {
                 className="grid h-9 w-9 place-items-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
               >
                 <Linkedin className="h-4 w-4" />
-              </a>
-              <a
-                href={siteConfig.socials.twitter}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Twitter / X"
-                className="grid h-9 w-9 place-items-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground"
-              >
-                <Twitter className="h-4 w-4" />
               </a>
               <a
                 href={`mailto:${siteConfig.email}`}
@@ -88,6 +79,16 @@ export function Footer() {
                   {siteConfig.email}
                 </a>
               </li>
+              {siteConfig.phone ? (
+                <li>
+                  <a
+                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {siteConfig.phone}
+                  </a>
+                </li>
+              ) : null}
               <li className="text-muted-foreground">{siteConfig.location}</li>
             </ul>
             <Link

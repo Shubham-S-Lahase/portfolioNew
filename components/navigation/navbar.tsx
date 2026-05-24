@@ -148,7 +148,6 @@ export function Navbar() {
           </button>
 
           <Button asChild variant="default" size="sm" className="hidden md:inline-flex">
-            {/* TODO: Replace siteConfig.resumeUrl with your real resume file. */}
             <a href={siteConfig.resumeUrl} download data-cursor="download ↓">
               <Download className="h-4 w-4" />
               Resume

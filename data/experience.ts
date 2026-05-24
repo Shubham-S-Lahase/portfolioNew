@@ -12,7 +12,7 @@ export const experience: ExperienceItem[] = [
   {
     company: "Biztoso Technologies Pvt. Ltd.",
     role: "Frontend Developer",
-    period: "Present",
+    period: "Sep 2024 – Present",
     location: "Bangalore",
     description:
       "Building a large social + marketplace platform and a low-code internal product, owning frontend architecture and performance.",
@@ -37,7 +37,7 @@ export const experience: ExperienceItem[] = [
   {
     company: "Gajan Solutions India Pvt. Ltd.",
     role: "Full Stack Developer",
-    period: "Previous role",
+    period: "Aug 2023 – Jul 2024",
     location: "Hyderabad",
     description:
       "Shipped corporate websites, SAP plugin UIs, and full-stack MERN applications with a strong focus on UX and reliability.",
@@ -60,8 +60,8 @@ export const experience: ExperienceItem[] = [
   {
     company: "10X Academy",
     role: "MERN Stack Developer Intern",
-    period: "Internship",
-    location: "Remote",
+    period: "Jun 2022 – Mar 2023",
+    location: "Hyderabad",
     description:
       "Hands-on training and project work across the full MERN stack with a strong emphasis on fundamentals and shipping.",
     bullets: [

@@ -14,9 +14,7 @@ export type Project = {
   features: string[];
   stack: string[];
   category: ProjectCategory;
-  // Optional: keep empty for private/company projects.
   github?: string;
-  // TODO: Replace with the real live-demo URL for each project.
   demo: string;
   accent: string; // gradient classes for hover glow
 };
@@ -37,8 +35,7 @@ export const projects: Project[] = [
     ],
     stack: ["React", "Material UI", "Redux", "Firebase"],
     category: "Dashboard",
-    // TODO: Replace with the real GitHub repo for this project.
-    github: "https://github.com/Shubham-S-Lahase",
+    github: "https://github.com/Shubham-S-Lahase/cffs",
     demo: "https://cffs.vercel.app/",
     accent: "from-amber-500/40 via-orange-500/30 to-rose-500/40",
   },

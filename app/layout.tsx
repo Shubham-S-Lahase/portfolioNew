@@ -53,7 +53,6 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — ${siteConfig.role}`,
     description: siteConfig.intro,
     images: [siteConfig.ogImage],
-    creator: "@shubhamlahase",
   },
   robots: {
     index: true,

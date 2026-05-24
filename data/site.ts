@@ -1,6 +1,5 @@
 /**
  * Site-wide configuration.
- * Replace the placeholder URLs with your real links before deploying.
  */
 export const siteConfig = {
   name: "Shubham Lahase",
@@ -12,18 +11,14 @@ export const siteConfig = {
     "I build production-grade React & Next.js applications focused on speed, accessibility, and clean architecture — from large marketplaces to internal tooling.",
   location: "India",
   email: "shubhlahase@gmail.com",
-  phone: "", // optional — leave empty to hide
-  // TODO: Replace with your live portfolio URL once deployed.
-  url: "https://shubhamlahase.dev",
+  phone: "+91 7709601253",
+  url: "https://portfolio-new-nine-chi.vercel.app",
   resumeUrl: "/assets/Shubham.pdf",
   socials: {
     linkedin: "https://www.linkedin.com/in/shubhamlahase/",
-    // TODO: Replace with your real GitHub profile URL.
-    github: "https://github.com/shubhamlahase",
-    // TODO: Replace with your real Twitter/X URL or remove from footer.
-    twitter: "https://x.com/shubhamlahase",
+    github: "https://github.com/Shubham-S-Lahase",
   },
-  ogImage: "/og-image.png",
+  ogImage: "/opengraph-image",
   keywords: [
     "Shubham Lahase",
     "Frontend Developer",

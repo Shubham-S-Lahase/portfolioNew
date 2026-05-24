@@ -1,10 +1,20 @@
 # Public assets
 
-Drop your real assets in this folder. The portfolio references these by default:
+## Resume (required for download buttons)
 
-- `Shubham-Lahase-Resume.pdf` — Your downloadable resume. Replace this placeholder
-  with your real PDF. The path is configured in `data/site.ts` (`resumeUrl`).
-- `og-image.png` — Open Graph / social-share image (1200×630 recommended).
-- `favicon.ico` (optional) — site favicon.
+Place your resume PDF at:
 
-If you rename any file, also update the corresponding entry in `data/site.ts`.
+```
+public/assets/Shubham.pdf
+```
+
+The path is configured in `data/site.ts` (`resumeUrl: "/assets/Shubham.pdf"`).
+
+## Social preview image
+
+Open Graph images are generated automatically via `app/opengraph-image.tsx`.
+You do not need to add `og-image.png` unless you prefer a custom static file.
+
+## Favicon
+
+The tab icon is generated via `app/icon.tsx`.

@@ -284,5 +284,5 @@ export const visibleCommands = () => visible(commands);
 
 /** Initial banner shown when the terminal mounts. */
 export const banner: CommandLine[] = [
-  { output: "shubham.dev — interactive shell — type `help` to begin." },
+  { output: "shubham — interactive shell — type `help` to begin." },
 ];

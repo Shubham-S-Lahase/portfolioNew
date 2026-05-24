@@ -94,7 +94,6 @@ export function Hero() {
               </Magnetic>
               <Magnetic>
                 <Button asChild variant="outline" size="lg">
-                  {/* TODO: Replace siteConfig.resumeUrl with your real resume file. */}
                   <a href={siteConfig.resumeUrl} download>
                     <Download className="h-4 w-4" />
                     Resume

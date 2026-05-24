@@ -106,7 +106,6 @@ export function Resume() {
           </div>
           <Magnetic>
             <Button asChild variant="default" size="lg">
-              {/* TODO: Replace siteConfig.resumeUrl with your real resume file. */}
               <a href={siteConfig.resumeUrl} download>
                 <Download className="h-4 w-4" />
                 Download Resume

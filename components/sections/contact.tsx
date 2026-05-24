@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Loader2,
   Mail,
+  Phone,
   Send,
   Linkedin,
   Github,
@@ -103,7 +104,7 @@ export function Contact() {
           <motion.div variants={fadeInUp} className="card-surface p-6">
             <span className="mono-caption">{"// reach me directly"}</span>
             <p className="mt-2 text-sm text-muted-foreground">
-              Prefer email or LinkedIn? Use the links below.
+              Prefer email, phone, or LinkedIn? Use the links below.
             </p>
             <div className="mt-6 space-y-2.5">
               <ContactLink
@@ -112,6 +113,14 @@ export function Contact() {
                 label="email"
                 value={siteConfig.email}
               />
+              {siteConfig.phone ? (
+                <ContactLink
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  icon={Phone}
+                  label="phone"
+                  value={siteConfig.phone}
+                />
+              ) : null}
               <ContactLink
                 href={siteConfig.socials.linkedin}
                 icon={Linkedin}
