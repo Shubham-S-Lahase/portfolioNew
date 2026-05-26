@@ -11,6 +11,7 @@ import {
 
 export type RomanticRevealState = {
   stanzas: string[];
+  backdropMessage?: string;
   userId: string;
 } | null;
 
@@ -25,7 +26,10 @@ export function useAssistantChat() {
       fetch: async (input, init) => {
         const response = await fetch(input, init);
         if (response.headers.get("X-Portfolio-Mode") === "rose") {
-          const data = (await response.json()) as { stanzas: string[] };
+          const data = (await response.json()) as {
+            stanzas: string[];
+            backdropMessage?: string;
+          };
           try {
             const body = JSON.parse(String(init?.body ?? "{}")) as {
               messages?: UIMessage[];
@@ -36,6 +40,7 @@ export function useAssistantChat() {
             if (lastUser?.id) {
               romanticRef.current({
                 stanzas: data.stanzas,
+                backdropMessage: data.backdropMessage,
                 userId: lastUser.id,
               });
             }

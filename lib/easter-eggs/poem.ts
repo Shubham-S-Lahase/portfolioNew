@@ -21,3 +21,17 @@ export function getPrivatePoemStanzas(): string[] | null {
     return null;
   }
 }
+
+/** Full-screen backdrop line — encrypted in env, same key as poem. */
+export function getPrivateBackdropMessage(): string | null {
+  const key = process.env.AMREEN_SECRET_KEY?.trim();
+  const payload = process.env.AMREEN_BACKDROP_PAYLOAD?.trim();
+  if (!key || !payload) return null;
+
+  try {
+    const plain = decryptSecret(payload, key).trim();
+    return plain.length > 0 ? plain : null;
+  } catch {
+    return null;
+  }
+}

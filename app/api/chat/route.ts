@@ -4,6 +4,7 @@ import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { buildAssistantSystemPrompt } from "@/lib/assistant-prompt";
 import { isPrivateLoveTrigger } from "@/lib/easter-eggs/detect";
 import {
+  getPrivateBackdropMessage,
   getPrivatePoemStanzas,
   ROSE_MODE_HEADER,
 } from "@/lib/easter-eggs/poem";
@@ -59,8 +60,9 @@ export async function POST(req: Request) {
   if (isPrivateLoveTrigger(lastUserText)) {
     const stanzas = getPrivatePoemStanzas();
     if (stanzas) {
+      const backdropMessage = getPrivateBackdropMessage();
       return Response.json(
-        { stanzas },
+        { stanzas, backdropMessage: backdropMessage ?? undefined },
         {
           headers: {
             "X-Portfolio-Mode": ROSE_MODE_HEADER,

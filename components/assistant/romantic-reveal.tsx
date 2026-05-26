@@ -9,8 +9,45 @@ import { cn } from "@/lib/utils";
 
 type RomanticRevealProps = {
   stanzas: string[];
+  /** Shown after the last stanza finishes revealing */
+  closingMessage?: string;
   className?: string;
+  onClosingVisible?: () => void;
 };
+
+function ClosingMessage({ message }: { message: string }) {
+  const parts = message.split(/"([^"]+)"/);
+  const hasHighlight = parts.length >= 3;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+      className="space-y-3 border-t border-rose-300/25 pt-4"
+    >
+      <StanzaDivider />
+      <p className="text-center font-serif text-[15px] leading-[1.65] text-rose-50/95 sm:text-base">
+        {hasHighlight ? (
+          <>
+            {parts[0]}
+            <span className="italic text-rose-200 drop-shadow-[0_0_12px_rgba(251,113,133,0.45)]">
+              &ldquo;{parts[1]}&rdquo;
+            </span>
+            {parts[2]}
+          </>
+        ) : (
+          message
+        )}
+      </p>
+      <Heart
+        className="mx-auto h-4 w-4 text-rose-400/90"
+        fill="currentColor"
+        aria-hidden
+      />
+    </motion.div>
+  );
+}
 
 function FloatingRoses({ reduced }: { reduced: boolean }) {
   if (reduced) return null;
@@ -84,9 +121,16 @@ function StanzaDivider() {
   );
 }
 
-export function RomanticReveal({ stanzas, className }: RomanticRevealProps) {
+export function RomanticReveal({
+  stanzas,
+  closingMessage,
+  className,
+  onClosingVisible,
+}: RomanticRevealProps) {
   const reduceMotion = useReducedMotion();
   const [visibleCount, setVisibleCount] = useState(reduceMotion ? stanzas.length : 0);
+  const [closingVisible, setClosingVisible] = useState(false);
+  const poemComplete = visibleCount >= stanzas.length;
 
   useEffect(() => {
     if (reduceMotion) {
@@ -94,6 +138,7 @@ export function RomanticReveal({ stanzas, className }: RomanticRevealProps) {
       return;
     }
     setVisibleCount(0);
+    setClosingVisible(false);
     let i = 0;
     const tick = () => {
       i += 1;
@@ -105,6 +150,23 @@ export function RomanticReveal({ stanzas, className }: RomanticRevealProps) {
     const start = window.setTimeout(tick, 400);
     return () => window.clearTimeout(start);
   }, [stanzas, reduceMotion]);
+
+  useEffect(() => {
+    if (!closingMessage || !poemComplete) {
+      setClosingVisible(false);
+      return;
+    }
+    if (reduceMotion) {
+      setClosingVisible(true);
+      return;
+    }
+    const t = window.setTimeout(() => setClosingVisible(true), 650);
+    return () => window.clearTimeout(t);
+  }, [closingMessage, poemComplete, reduceMotion]);
+
+  useEffect(() => {
+    if (closingVisible) onClosingVisible?.();
+  }, [closingVisible, onClosingVisible]);
 
   return (
     <div
@@ -180,6 +242,9 @@ export function RomanticReveal({ stanzas, className }: RomanticRevealProps) {
               </motion.p>
             </div>
           ))}
+          {closingVisible && closingMessage ? (
+            <ClosingMessage message={closingMessage} />
+          ) : null}
         </div>
       </div>
     </div>

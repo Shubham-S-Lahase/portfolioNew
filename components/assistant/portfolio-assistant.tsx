@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { MessageContent } from "@/components/assistant/message-content";
+import { FallingFlowersBackground } from "@/components/assistant/falling-flowers-background";
 import { RomanticReveal } from "@/components/assistant/romantic-reveal";
 import { RoseIcon } from "@/components/assistant/rose-icon";
 import { useAssistantChat } from "@/components/assistant/use-assistant-chat";
@@ -151,14 +152,18 @@ export function PortfolioAssistant() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={cn(
-              "fixed inset-0 z-[85] backdrop-blur-sm",
+              "fixed inset-0 z-[85] overflow-hidden backdrop-blur-sm",
               roseMode
-                ? "bg-rose-950/40 sm:bg-rose-950/25"
+                ? "bg-rose-950/45 sm:bg-rose-950/30"
                 : "bg-background/50 sm:bg-background/35"
             )}
             aria-hidden
             onClick={() => setOpen(false)}
-          />
+          >
+            {roseMode && !reduceMotion ? (
+              <FallingFlowersBackground density="backdrop" />
+            ) : null}
+          </motion.div>
         ) : null}
       </AnimatePresence>
 
@@ -180,9 +185,13 @@ export function PortfolioAssistant() {
             )}
             onClick={(e) => e.stopPropagation()}
           >
+            {roseMode && !reduceMotion ? (
+              <FallingFlowersBackground density="panel" className="z-0" />
+            ) : null}
+
             <header
               className={cn(
-                "flex items-center gap-3 border-b px-4 py-3",
+                "relative z-10 flex items-center gap-3 border-b px-4 py-3",
                 roseMode ? "border-rose-200/10" : "border-border/70"
               )}
             >
@@ -260,7 +269,7 @@ export function PortfolioAssistant() {
 
             <div
               ref={scrollRef}
-              className="flex-1 space-y-4 overflow-y-auto px-4 py-4"
+              className="relative z-10 flex-1 space-y-4 overflow-y-auto px-4 py-4"
             >
               {messages.length === 0 ? (
                 <Welcome onPick={submitText} />
@@ -306,7 +315,9 @@ export function PortfolioAssistant() {
                       {showRose ? (
                         <RomanticReveal
                           stanzas={romantic.stanzas}
+                          closingMessage={romantic.backdropMessage}
                           className="max-w-[92%]"
+                          onClosingVisible={scrollToBottom}
                         />
                       ) : null}
                     </div>
@@ -342,7 +353,7 @@ export function PortfolioAssistant() {
             <form
               onSubmit={onSubmit}
               className={cn(
-                "border-t p-3",
+                "relative z-10 border-t p-3",
                 roseMode ? "border-rose-200/10" : "border-border/70"
               )}
             >
