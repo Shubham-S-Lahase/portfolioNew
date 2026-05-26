@@ -39,6 +39,7 @@ export function Projects() {
               <button
                 key={cat}
                 type="button"
+                suppressHydrationWarning
                 onClick={() => setFilter(cat)}
                 aria-pressed={active}
                 className={cn(

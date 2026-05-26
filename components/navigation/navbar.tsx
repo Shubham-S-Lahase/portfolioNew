@@ -134,6 +134,7 @@ export function Navbar() {
           {/* Command palette trigger */}
           <button
             type="button"
+            suppressHydrationWarning
             onClick={openPalette}
             data-cursor="search ⌘K"
             className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
@@ -156,6 +157,7 @@ export function Navbar() {
 
           <button
             type="button"
+            suppressHydrationWarning
             onClick={() => setOpen((v) => !v)}
             className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-secondary/30 text-foreground"
             aria-label={open ? "Close menu" : "Open menu"}

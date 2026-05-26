@@ -277,6 +277,7 @@ export function PortfolioAssistant() {
               <div className="flex items-end gap-2 rounded-xl border border-border/80 bg-background/80 p-2 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30">
                 <textarea
                   ref={inputRef}
+                  suppressHydrationWarning
                   value={input}
                   onChange={(e) =>
                     setInput(e.target.value.slice(0, MAX_INPUT))
@@ -321,6 +322,7 @@ export function PortfolioAssistant() {
 
       <motion.button
         type="button"
+        suppressHydrationWarning
         aria-expanded={open}
         aria-label={open ? "Close portfolio assistant" : "Open portfolio assistant"}
         onClick={() => setOpen((v) => !v)}
@@ -360,6 +362,7 @@ function Welcome({ onPick }: { onPick: (text: string) => void }) {
             <button
               key={prompt}
               type="button"
+              suppressHydrationWarning
               onClick={() => onPick(prompt)}
               className="rounded-lg border border-border/70 bg-secondary/30 px-3 py-2.5 text-left text-xs leading-relaxed text-muted-foreground transition-colors hover:border-primary/40 hover:bg-secondary/60 hover:text-foreground"
             >

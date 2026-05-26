@@ -284,6 +284,7 @@ export function CommandPalette() {
               <Search className="h-4 w-4 text-muted-foreground" />
               <input
                 ref={inputRef}
+                suppressHydrationWarning
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value);
@@ -297,6 +298,7 @@ export function CommandPalette() {
               {query ? (
                 <button
                   type="button"
+                  suppressHydrationWarning
                   onClick={clearSearch}
                   className="kbd hover:border-primary/50 hover:text-foreground"
                   aria-label="Clear search"
@@ -329,6 +331,7 @@ export function CommandPalette() {
                             <button
                               key={a.id}
                               type="button"
+                              suppressHydrationWarning
                               onMouseEnter={() => setActiveIdx(idx)}
                               onClick={() => a.perform()}
                               className={cn(

@@ -282,6 +282,7 @@ export function Terminal() {
             <span className="invisible">{input || " "}</span>
             <input
               ref={inputRef}
+              suppressHydrationWarning
               type="text"
               autoComplete="off"
               autoCorrect="off"
@@ -313,6 +314,7 @@ export function Terminal() {
             <button
               key={s}
               type="button"
+              suppressHydrationWarning
               onClick={() => {
                 runCommand(s);
               }}
