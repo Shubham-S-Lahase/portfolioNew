@@ -109,16 +109,30 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript check |
 
+## 🤖 AI assistant (Portfolio Guide)
+
+An embedded chat assistant answers questions about your experience, projects, and fit for roles — grounded in your portfolio data (`lib/portfolio-knowledge.ts`).
+
+**Cost: $0** — uses [Groq](https://console.groq.com) with **open-source Llama** models (no credit card).
+
+1. Sign up at [console.groq.com](https://console.groq.com) and create an API key (`gsk_...`).
+2. Copy `.env.example` → `.env.local` and set:
+   ```
+   GROQ_API_KEY=gsk_your-key-here
+   ```
+3. On Vercel: **Settings → Environment Variables** → add `GROQ_API_KEY`, then redeploy.
+
+Optional: `GROQ_MODEL` (default `llama-3.3-70b-versatile`; use `llama-3.1-8b-instant` for faster/cheaper limits).
+
+Open the assistant via the floating button (bottom-right) or **⌘K** → “Ask AI assistant”.
+
 ## 🔧 Things to customize before deploying
 
-Search the codebase for `TODO:` — each one is a hot spot you may want to replace.
-
-1. **Site info** — `data/site.ts` (URL, resume path, social links, OG image).
-2. **Resume PDF** — drop `Shubham-Lahase-Resume.pdf` into `/public` (or change `siteConfig.resumeUrl`).
-3. **OG image** — drop `og-image.png` into `/public` (1200×630 recommended).
-4. **Project links** — `data/projects.ts` (GitHub + live demo URLs per project).
-5. **Testimonials** — `data/testimonials.ts` (placeholder quotes).
-6. **Contact form submission** — `components/sections/contact.tsx` — hook the `onSubmit` to your real backend (Resend, EmailJS, an API route, etc.).
+1. **Site info** — `data/site.ts` (URL, resume path, social links).
+2. **Resume PDF** — `public/assets/Shubham.pdf` (or update `siteConfig.resumeUrl`).
+3. **Project links** — `data/projects.ts` (GitHub + live demo URLs per project).
+4. **Assistant knowledge** — updates automatically when you edit files under `data/`.
+5. **Contact form** — Web3Forms key in `components/sections/contact.tsx`.
 
 ## ♿ Accessibility & motion
 

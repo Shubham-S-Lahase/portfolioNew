@@ -11,6 +11,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
+  Bot,
   Briefcase,
   Code2,
   Download,
@@ -26,6 +27,7 @@ import {
   Eraser,
 } from "lucide-react";
 
+import { openPortfolioAssistant } from "@/components/assistant/portfolio-assistant";
 import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -127,6 +129,17 @@ export function CommandPalette() {
       { id: "nav.contact", label: "Contact", group: "Navigate", icon: Mail, perform: () => navTo("#contact") },
 
       // Actions
+      {
+        id: "act.assistant",
+        label: "Ask AI assistant",
+        hint: "portfolio guide · hiring & projects",
+        group: "Actions",
+        icon: Bot,
+        perform: () => {
+          close();
+          openPortfolioAssistant();
+        },
+      },
       {
         id: "act.resume",
         label: "Download resume",

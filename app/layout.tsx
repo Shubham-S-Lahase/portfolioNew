@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { siteConfig } from "@/data/site";
+import { PortfolioAssistant } from "@/components/assistant/portfolio-assistant";
 import { CommandPalette } from "@/components/command-palette";
 import { CustomCursor } from "@/components/effects/custom-cursor";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
@@ -82,8 +83,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} dark`}>
-      <body className="grain min-h-screen bg-background text-foreground antialiased selection:bg-primary/30">
+    <html
+      lang="en"
+      className={`${sans.variable} ${mono.variable} dark`}
+      suppressHydrationWarning
+    >
+      <body
+        className="grain min-h-screen bg-background text-foreground antialiased selection:bg-primary/30"
+        suppressHydrationWarning
+      >
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-primary-foreground"
@@ -93,6 +101,7 @@ export default function RootLayout({
         <ScrollProgress />
         <CustomCursor />
         <CommandPalette />
+        <PortfolioAssistant />
         <Navbar />
         <main id="main">{children}</main>
       </body>
