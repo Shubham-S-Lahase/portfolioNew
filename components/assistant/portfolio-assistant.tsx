@@ -8,7 +8,6 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from "react";
-import { useChat } from "@ai-sdk/react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Bot,
@@ -23,6 +22,9 @@ import {
 } from "lucide-react";
 
 import { MessageContent } from "@/components/assistant/message-content";
+import { RomanticReveal } from "@/components/assistant/romantic-reveal";
+import { RoseIcon } from "@/components/assistant/rose-icon";
+import { useAssistantChat } from "@/components/assistant/use-assistant-chat";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
 import {
@@ -50,9 +52,17 @@ export function PortfolioAssistant() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const reduceMotion = useReducedMotion();
 
-  const { messages, sendMessage, status, error, stop, setMessages } = useChat();
+  const {
+    messages,
+    error,
+    romantic,
+    isBusy,
+    sendUserMessage,
+    stop,
+    clearChat,
+  } = useAssistantChat();
 
-  const isBusy = status === "submitted" || status === "streaming";
+  const roseMode = romantic !== null;
 
   const scrollToBottom = useCallback(() => {
     const el = scrollRef.current;
@@ -62,7 +72,7 @@ export function PortfolioAssistant() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, status, scrollToBottom]);
+  }, [messages, romantic, isBusy, scrollToBottom]);
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
@@ -94,36 +104,31 @@ export function PortfolioAssistant() {
     }
   }, [error]);
 
-  const sendUserMessage = useCallback(
+  const submitText = useCallback(
     async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || isBusy) return;
       setSetupError(null);
       setInput("");
-      try {
-        await sendMessage({ text: trimmed });
-      } catch {
-        /* surfaced via error state */
-      }
+      await sendUserMessage(trimmed);
     },
-    [isBusy, sendMessage]
+    [isBusy, sendUserMessage]
   );
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    void sendUserMessage(input);
+    void submitText(input);
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      void sendUserMessage(input);
+      void submitText(input);
     }
   };
 
-  const clearChat = () => {
-    stop();
-    setMessages([]);
+  const handleClearChat = () => {
+    clearChat();
     setSetupError(null);
     setInput("");
   };
@@ -145,7 +150,12 @@ export function PortfolioAssistant() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[85] bg-background/50 backdrop-blur-sm sm:bg-background/35"
+            className={cn(
+              "fixed inset-0 z-[85] backdrop-blur-sm",
+              roseMode
+                ? "bg-rose-950/40 sm:bg-rose-950/25"
+                : "bg-background/50 sm:bg-background/35"
+            )}
             aria-hidden
             onClick={() => setOpen(false)}
           />
@@ -162,22 +172,55 @@ export function PortfolioAssistant() {
             {...panelMotion}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
             className={cn(
-              "fixed z-[86] flex flex-col overflow-hidden border border-border/80 bg-card/95 shadow-[0_24px_80px_-24px_hsl(var(--primary)/0.25)] backdrop-blur-xl",
-              "inset-x-3 bottom-20 top-auto h-[min(72vh,640px)] rounded-2xl sm:inset-x-auto sm:bottom-24 sm:right-5 sm:w-[min(100vw-2rem,420px)]"
+              "fixed z-[86] flex flex-col overflow-hidden border backdrop-blur-xl",
+              "inset-x-3 bottom-20 top-auto h-[min(72vh,640px)] rounded-2xl sm:inset-x-auto sm:bottom-24 sm:right-5 sm:w-[min(100vw-2rem,420px)]",
+              roseMode
+                ? "border-rose-300/35 bg-gradient-to-b from-[#241018]/98 via-[#2d1520]/97 to-[#1a0c12]/98 shadow-[0_0_80px_-20px_rgba(225,29,72,0.5),0_24px_60px_-24px_rgba(190,18,60,0.35)] ring-1 ring-rose-400/10"
+                : "border-border/80 bg-card/95 shadow-[0_24px_80px_-24px_hsl(var(--primary)/0.25)]"
             )}
             onClick={(e) => e.stopPropagation()}
           >
-            <header className="flex items-center gap-3 border-b border-border/70 px-4 py-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-primary/40 bg-primary/15 text-primary shadow-[0_0_24px_-8px_hsl(var(--primary)/0.8)]">
-                <Bot className="h-5 w-5" />
+            <header
+              className={cn(
+                "flex items-center gap-3 border-b px-4 py-3",
+                roseMode ? "border-rose-200/10" : "border-border/70"
+              )}
+            >
+              <span
+                className={cn(
+                  "grid h-10 w-10 place-items-center rounded-xl border shadow-[0_0_24px_-8px_hsl(var(--primary)/0.8)]",
+                  roseMode
+                    ? "border-rose-300/40 bg-gradient-to-br from-rose-500/20 to-rose-900/30 text-rose-200 shadow-[0_0_24px_-6px_rgba(244,63,94,0.7)]"
+                    : "border-primary/40 bg-primary/15 text-primary"
+                )}
+              >
+                {roseMode ? (
+                  <RoseIcon className="h-5 w-5 text-rose-300" aria-hidden />
+                ) : (
+                  <Bot className="h-5 w-5" />
+                )}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="flex items-center gap-1.5 text-sm font-semibold tracking-tight">
-                  Portfolio Guide
-                  <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden />
+                <p
+                  className={cn(
+                    "flex items-center gap-1.5 text-sm font-semibold tracking-tight",
+                    roseMode && "font-serif italic text-rose-100/95"
+                  )}
+                >
+                  {roseMode ? "A quiet letter" : "Portfolio Guide"}
+                  {!roseMode && (
+                    <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden />
+                  )}
                 </p>
-                <p className="truncate text-xs text-muted-foreground">
-                  Expert on {siteConfig.shortName}&apos;s work · Llama (open source)
+                <p
+                  className={cn(
+                    "truncate text-xs",
+                    roseMode ? "text-rose-300/55" : "text-muted-foreground"
+                  )}
+                >
+                  {roseMode
+                    ? "just between us"
+                    : `Expert on ${siteConfig.shortName}'s work · Llama (open source)`}
                 </p>
               </div>
               <div className="flex items-center gap-0.5">
@@ -187,7 +230,7 @@ export function PortfolioAssistant() {
                   size="icon"
                   className="h-8 w-8"
                   aria-label="Clear conversation"
-                  onClick={clearChat}
+                  onClick={handleClearChat}
                   disabled={messages.length === 0 && !input}
                 >
                   <RotateCcw className="h-4 w-4" />
@@ -220,45 +263,71 @@ export function PortfolioAssistant() {
               className="flex-1 space-y-4 overflow-y-auto px-4 py-4"
             >
               {messages.length === 0 ? (
-                <Welcome onPick={sendUserMessage} />
+                <Welcome onPick={submitText} />
               ) : (
-                messages.map((message) => {
+                messages
+                  .filter((message) => {
+                    if (message.role !== "assistant") return true;
+                    return getMessageText(message).trim().length > 0;
+                  })
+                  .map((message) => {
                   const text = getMessageText(message);
-                  if (!text) return null;
                   const isUser = message.role === "user";
+                  const showRose =
+                    romantic && isUser && romantic.userId === message.id;
+
                   return (
-                    <div
-                      key={message.id}
-                      className={cn(
-                        "flex",
-                        isUser ? "justify-end" : "justify-start"
-                      )}
-                    >
+                    <div key={message.id} className="space-y-3">
                       <div
                         className={cn(
-                          "max-w-[92%] rounded-2xl px-3.5 py-2.5",
-                          isUser
-                            ? "bg-primary text-primary-foreground"
-                            : "border border-border/70 bg-secondary/40"
+                          "flex",
+                          isUser ? "justify-end" : "justify-start"
                         )}
                       >
-                        {isUser ? (
-                          <p className="whitespace-pre-wrap text-sm leading-relaxed">
-                            {text}
-                          </p>
-                        ) : (
-                          <MessageContent text={text} />
-                        )}
+                        <div
+                          className={cn(
+                            "max-w-[92%] rounded-2xl px-3.5 py-2.5",
+                            isUser
+                              ? roseMode
+                                ? "bg-rose-600/90 text-rose-50"
+                                : "bg-primary text-primary-foreground"
+                              : "border border-border/70 bg-secondary/40"
+                          )}
+                        >
+                          {isUser ? (
+                            <p className="whitespace-pre-wrap text-sm leading-relaxed">
+                              {text}
+                            </p>
+                          ) : (
+                            <MessageContent text={text} />
+                          )}
+                        </div>
                       </div>
+                      {showRose ? (
+                        <RomanticReveal
+                          stanzas={romantic.stanzas}
+                          className="max-w-[92%]"
+                        />
+                      ) : null}
                     </div>
                   );
                 })
               )}
 
               {isBusy && messages[messages.length - 1]?.role === "user" ? (
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
-                  Thinking…
+                <div
+                  className={cn(
+                    "flex items-center gap-2 text-xs",
+                    roseMode ? "text-rose-300/70" : "text-muted-foreground"
+                  )}
+                >
+                  <Loader2
+                    className={cn(
+                      "h-3.5 w-3.5 animate-spin",
+                      roseMode ? "text-rose-400" : "text-primary"
+                    )}
+                  />
+                  {roseMode ? "Unfolding…" : "Thinking…"}
                 </div>
               ) : null}
 
@@ -272,9 +341,19 @@ export function PortfolioAssistant() {
 
             <form
               onSubmit={onSubmit}
-              className="border-t border-border/70 p-3"
+              className={cn(
+                "border-t p-3",
+                roseMode ? "border-rose-200/10" : "border-border/70"
+              )}
             >
-              <div className="flex items-end gap-2 rounded-xl border border-border/80 bg-background/80 p-2 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30">
+              <div
+                className={cn(
+                  "flex items-end gap-2 rounded-xl border p-2 transition-shadow",
+                  roseMode
+                    ? "border-rose-300/25 bg-rose-950/40 focus-within:border-rose-400/45 focus-within:ring-1 focus-within:ring-rose-400/25"
+                    : "border-border/80 bg-background/80 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30"
+                )}
+              >
                 <textarea
                   ref={inputRef}
                   suppressHydrationWarning
@@ -284,9 +363,18 @@ export function PortfolioAssistant() {
                   }
                   onKeyDown={onKeyDown}
                   rows={1}
-                  placeholder="Ask about experience, projects, fit for a role…"
+                  placeholder={
+                    roseMode
+                      ? "Say something softly…"
+                      : "Ask about experience, projects, fit for a role…"
+                  }
                   disabled={isBusy}
-                  className="max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-muted-foreground/70 disabled:opacity-60"
+                  className={cn(
+                    "max-h-28 min-h-[40px] flex-1 resize-none bg-transparent px-1 py-2 text-sm outline-none disabled:opacity-60",
+                    roseMode
+                      ? "text-rose-50/90 placeholder:text-rose-300/40"
+                      : "placeholder:text-muted-foreground/70"
+                  )}
                   aria-label="Message to portfolio assistant"
                 />
                 {isBusy ? (
@@ -304,7 +392,11 @@ export function PortfolioAssistant() {
                   <Button
                     type="submit"
                     size="icon"
-                    className="h-9 w-9 shrink-0"
+                    className={cn(
+                      "h-9 w-9 shrink-0",
+                      roseMode &&
+                        "border-rose-300/30 bg-gradient-to-br from-rose-500 to-rose-700 text-rose-50 shadow-[0_4px_20px_-4px_rgba(225,29,72,0.8)] hover:from-rose-400 hover:to-rose-600"
+                    )}
                     disabled={!input.trim()}
                     aria-label="Send message"
                   >
@@ -312,7 +404,12 @@ export function PortfolioAssistant() {
                   </Button>
                 )}
               </div>
-              <p className="mt-2 text-center font-mono text-[10px] text-muted-foreground/80">
+              <p
+                className={cn(
+                  "mt-2 text-center font-mono text-[10px]",
+                  roseMode ? "text-rose-400/45" : "text-muted-foreground/80"
+                )}
+              >
                 Enter to send · Shift+Enter for newline
               </p>
             </form>
